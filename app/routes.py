@@ -19,7 +19,8 @@ def create_client():
     )
     db.session.add(new_client)
     db.session.commit()
-    return jsonify({"message": "Client created", "id": new_client.id}), 201
+    return jsonify({"message": "Client created",
+                    "id": new_client.id}), 201
 
 
 # POST /parkings — создание парковки
@@ -35,7 +36,8 @@ def create_parking():
     db.session.add(new_parking)
     db.session.commit()
     # Убрали лишнюю запятую и добавили 201
-    return jsonify({"message": "Parking created", "id": new_parking.id}), 201
+    return jsonify({"message": "Parking created",
+                    "id": new_parking.id}), 201
 
 
 # GET /clients — список всех клиентов
@@ -53,7 +55,8 @@ def get_client(client_id):
     # НОВЫЙ СТИЛЬ: db.get_or_404 теперь вызывается от объекта db
     client = db.get_or_404(Client, client_id)
     return jsonify({"id": client.id, "name": client.name,
-                    "surname": client.surname, "card": client.credit_card}), 200
+                    "surname": client.surname,
+                    "card": client.credit_card}), 200
 
 
 # POST /clients и /parkings остаются без изменений, там db.session.add - это актуальный метод
@@ -73,7 +76,8 @@ def enter_parking():
     if parking.count_available_places <= 0:
         return jsonify({"error": "No available places"}), 400
 
-    new_log = ClientParking(client_id=client_id, parking_id=parking_id, time_in=datetime.now())
+    new_log = ClientParking(client_id=client_id,
+                            parking_id=parking_id, time_in=datetime.now())
     parking.count_available_places -= 1
 
     db.session.add(new_log)
