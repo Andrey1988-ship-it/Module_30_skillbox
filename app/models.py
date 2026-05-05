@@ -38,5 +38,3 @@ class ClientParking(db.Model):  # type: ignore
     parking_id = db.Column(db.Integer, db.ForeignKey("parking.id"))
     time_in = db.Column(db.DateTime, default=datetime.now)
     time_out = db.Column(db.DateTime)
-
-
