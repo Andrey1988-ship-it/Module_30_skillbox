@@ -1,0 +1,33 @@
+name: FastAPI Quality Gate
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.11"
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install flake8 mypy pytest fastapi uvicorn httpx
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+    - name: Run Flake8 (Линтер)
+      run: flake8 . --count --max-line-length=88 --statistics
+
+    - name: Run Mypy (Типизация)
+      run: mypy . --ignore-missing-imports
+
+    - name: Run Tests (Тесты)
+      run: pytest
