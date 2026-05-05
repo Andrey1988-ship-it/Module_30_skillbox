@@ -59,7 +59,8 @@ def get_client(client_id):
                     "card": client.credit_card}), 200
 
 
-# POST /clients и /parkings остаются без изменений, там db.session.add - это актуальный метод
+# POST /clients и /parkings остаются без изменений, там db.session.add - это актуальный
+# метод
 
 # POST /client_parkings — заезд
 @api_bp.route('/client_parkings', methods=['POST'])
