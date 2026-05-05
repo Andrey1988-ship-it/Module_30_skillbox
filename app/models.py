@@ -2,10 +2,6 @@ from datetime import datetime
 from .database import db
 
 
-from .database import db
-from sqlalchemy.orm import DeclarativeBase  # Добавьте, если используете SQLAlchemy 2.0+
-
-# Если Mypy ругается на db.Model, можно добавить такую проверку:
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from flask_sqlalchemy.model import Model
@@ -13,11 +9,8 @@ if TYPE_CHECKING:
 else:
     Base = db.Model
 
-class Client(Base): # Используйте Base вместо db.Model
-    __tablename__ = "client"
 
-
-class Client(db.Model):
+class Client(Base):
     __tablename__ = "client"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False)
