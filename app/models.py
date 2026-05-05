@@ -10,7 +10,7 @@ else:
     Base = db.Model
 
 
-class Client(Base):
+class Client(Base):# type: ignore
     __tablename__ = "client"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False)
@@ -19,7 +19,7 @@ class Client(Base):
     car_number = db.Column(db.String(10))
 
 
-class Parking(db.Model):
+class Parking(db.Model):# type: ignore
     __tablename__ = "parking"
     id = db.Column(db.Integer, primary_key=True)
     address = db.Column(db.String(100), nullable=False)
@@ -28,7 +28,7 @@ class Parking(db.Model):
     count_available_places = db.Column(db.Integer, nullable=False)
 
 
-class ClientParking(db.Model):
+class ClientParking(db.Model):# type: ignore
     __tablename__ = "client_parking"
     # Тот самый UNIQUE из задания
     __table_args__ = (
