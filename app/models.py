@@ -1,6 +1,7 @@
 from datetime import datetime
 from .database import db
 
+
 class Client(db.Model):
     __tablename__ = "client"
     id = db.Column(db.Integer, primary_key=True)
@@ -9,6 +10,7 @@ class Client(db.Model):
     credit_card = db.Column(db.String(50))
     car_number = db.Column(db.String(10))
 
+
 class Parking(db.Model):
     __tablename__ = "parking"
     id = db.Column(db.Integer, primary_key=True)
@@ -16,6 +18,7 @@ class Parking(db.Model):
     opened = db.Column(db.Boolean, default=True)
     count_places = db.Column(db.Integer, nullable=False)
     count_available_places = db.Column(db.Integer, nullable=False)
+
 
 class ClientParking(db.Model):
     __tablename__ = "client_parking"

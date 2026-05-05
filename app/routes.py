@@ -6,6 +6,7 @@ from sqlalchemy import select  # Импортируем select для запро
 
 api_bp = Blueprint('api', __name__)
 
+
 # POST /clients — создание клиента
 @api_bp.route('/clients', methods=['POST'])
 def create_client():
@@ -19,6 +20,7 @@ def create_client():
     db.session.add(new_client)
     db.session.commit()
     return jsonify({"message": "Client created", "id": new_client.id}), 201
+
 
 # POST /parkings — создание парковки
 @api_bp.route('/parkings', methods=['POST'])
@@ -41,7 +43,8 @@ def create_parking():
 def get_clients():
     # НОВЫЙ СТИЛЬ: используем select
     clients = db.session.execute(select(Client)).scalars().all()
-    return jsonify([{"id": c.id, "name": c.name, "car_number": c.car_number} for c in clients]), 200
+    return jsonify([{"id": c.id, "name": c.name,
+                     "car_number": c.car_number} for c in clients]), 200
 
 
 # GET /clients/<id> — инфо о клиенте
@@ -49,7 +52,8 @@ def get_clients():
 def get_client(client_id):
     # НОВЫЙ СТИЛЬ: db.get_or_404 теперь вызывается от объекта db
     client = db.get_or_404(Client, client_id)
-    return jsonify({"id": client.id, "name": client.name, "surname": client.surname, "card": client.credit_card}), 200
+    return jsonify({"id": client.id, "name": client.name,
+                    "surname": client.surname, "card": client.credit_card}), 200
 
 
 # POST /clients и /parkings остаются без изменений, там db.session.add - это актуальный метод
@@ -88,7 +92,7 @@ def exit_parking():
     stmt = select(ClientParking).where(
         ClientParking.client_id == client_id,
         ClientParking.parking_id == parking_id,
-        ClientParking.time_out == None
+        ClientParking.time_out.is_(None)
     )
     log = db.session.execute(stmt).scalar_one_or_none()
 
@@ -107,5 +111,3 @@ def exit_parking():
 
     db.session.commit()
     return jsonify({"message": "Goodbye, payment successful"}), 200
-
-

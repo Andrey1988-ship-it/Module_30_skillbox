@@ -1,9 +1,9 @@
 import pytest
 from app import create_app
 from app.database import db
-from app.models import Client, Parking, ClientParking
 
-from datetime import datetime
+
+
 
 
 @pytest.fixture
@@ -19,8 +19,11 @@ def app():
         db.create_all()
 
         # Создаем тестовые данные для фикстуры
-        c1 = Client(name="Test", surname="User", credit_card="1111", car_number="T111TT")
-        p1 = Parking(address="Test St", count_places=10, count_available_places=10, opened=True)
+        c1 = Client(name="Test", surname="User",
+                    credit_card="1111", car_number="T111TT")
+        p1 = Parking(address="Test St",
+                     count_places=10,
+                     count_available_places=10, opened=True)
         db.session.add_all([c1, p1])
         db.session.commit()
 

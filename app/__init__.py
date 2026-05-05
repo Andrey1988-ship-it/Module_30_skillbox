@@ -2,6 +2,7 @@ from flask import Flask
 from .database import db
 from .routes import api_bp  # Импортируем роуты
 
+
 def create_app(config_class="app.config.Config"):
     app = Flask(__name__)
     app.config.from_object(config_class)

@@ -13,7 +13,8 @@ class ClientFactory(factory.alchemy.SQLAlchemyModelFactory):
     surname = factory.Faker("last_name")
     # credit_card: либо строка с цифрами, либо None
     credit_card = factory.LazyFunction(
-        lambda: str(random.randint(1000, 9999)) if random.choice([True, False]) else None
+        lambda: str(random.randint(1000, 9999))
+        if random.choice([True, False]) else None
     )
     car_number = factory.Faker("bothify", text="?###??##")
 
