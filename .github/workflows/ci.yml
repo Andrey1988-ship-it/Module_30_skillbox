@@ -27,7 +27,7 @@ jobs:
       run: flake8 . --count --max-line-length=88 --statistics
 
     - name: Run Mypy (Типизация)
-      run: mypy . --ignore-missing-imports
+      run: mypy . --ignore-missing-imports --explicit-package-bases
 
     - name: Run Tests (Тесты)
       run: pytest
