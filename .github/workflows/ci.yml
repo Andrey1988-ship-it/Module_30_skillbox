@@ -30,4 +30,7 @@ jobs:
       run: mypy . --ignore-missing-imports --explicit-package-bases
 
     - name: Run Tests (Тесты)
+      env:
+        PYTHONPATH: .
       run: pytest
+
